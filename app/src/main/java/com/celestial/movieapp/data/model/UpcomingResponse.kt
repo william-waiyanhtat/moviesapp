@@ -7,7 +7,7 @@ data class UpcomingResponse (
    val commonResponse: CommonResponse,
 
    @SerializedName("result")
-   val result: MovieModel,
+   val result: List<MovieModel>,
 
    @SerializedName("dates")
    val dates: Dates

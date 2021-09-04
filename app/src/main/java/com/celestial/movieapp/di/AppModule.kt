@@ -1,9 +1,13 @@
 package com.celestial.movieapp.di
 
 import android.content.Context
+import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.celestial.movieapp.R
+import com.celestial.movieapp.data.MoviesRepository
+import com.celestial.movieapp.data.local.MoviesDao
+import com.celestial.movieapp.data.local.MoviesDatabase
 import com.celestial.movieapp.data.network.api.MoviesAPI
 import com.celestial.movieapp.di.Constants.BASE_URL
 import dagger.Module
@@ -36,13 +40,33 @@ class AppModule {
 
     )
 
-//    @Singleton
-//    @Provides
-//    fun providePixabayAPI(): MoviesAPI{
-//        return Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl(BASE_URL)
-//            .build()
-//            .create(PixabayAPI::class.java)
-//    }
+    @Singleton
+    @Provides
+    fun providePixabayAPI(): MoviesAPI{
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .build()
+            .create(MoviesAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMovieDao(
+        database: MoviesDatabase
+    ) = database.moviesDao()
+
+    @Singleton
+    @Provides
+    fun provideMoviesDatabase(
+        @ApplicationContext context: Context,
+    ) = Room.databaseBuilder(context, MoviesDatabase::class.java, Constants.DB_NAME).build()
+
+
+    @Singleton
+    @Provides
+    fun provideMoviesRepository(
+        dao: MoviesDao,
+        api: MoviesAPI
+    ) = MoviesRepository(dao, api)
 }

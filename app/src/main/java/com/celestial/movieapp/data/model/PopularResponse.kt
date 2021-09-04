@@ -8,5 +8,5 @@ data class PopularResponse (
   val commonResponse: CommonResponse,
 
   @SerializedName("results")
-  val result: MovieModel
+  val result: List<MovieModel>
   )

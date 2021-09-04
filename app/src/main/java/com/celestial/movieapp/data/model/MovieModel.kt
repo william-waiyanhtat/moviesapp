@@ -1,7 +1,13 @@
 package com.celestial.movieapp.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
+import java.lang.reflect.Type
 
+@Entity(tableName = "movies")
 data class MovieModel(
     @SerializedName("adult")
     val adult: Boolean,
@@ -9,9 +15,11 @@ data class MovieModel(
     @SerializedName("backdrop_path")
     val backdropPath: String,
 
-    @SerializedName("genre_ids")
-    val genreIds: Array<Int>? = null,
 
+    @SerializedName("genre_ids")
+    val genreIds: Array<Int?>?,
+
+    @PrimaryKey
     @SerializedName("id")
     val id: Int,
 
@@ -43,6 +51,9 @@ data class MovieModel(
     val voteAverage: Int,
 
     @SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int,
 
-        )
+    @SerializedName("is_upcoming")
+    val isUpcoming: Boolean = true
+
+)
