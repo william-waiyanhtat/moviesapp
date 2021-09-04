@@ -46,8 +46,6 @@ class AppModule {
         RequestOptions()
             .placeholder(R.drawable.ic_image)
             .error(R.drawable.ic_image)
-
-
     )
 
     @Singleton

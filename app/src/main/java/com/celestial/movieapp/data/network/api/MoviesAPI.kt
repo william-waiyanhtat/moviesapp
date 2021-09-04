@@ -1,8 +1,7 @@
 package com.celestial.movieapp.data.network.api
 
 import com.celestial.movieapp.BuildConfig
-import com.celestial.movieapp.data.model.PopularResponse
-import com.celestial.movieapp.data.model.UpcomingResponse
+import com.celestial.movieapp.data.model.CommonResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,7 +16,7 @@ interface MoviesAPI {
         lang: String = "en-US",
         @Query("page")
         page: Int
-    ): Response<PopularResponse>
+    ): Response<CommonResponse>
 
 
     @GET("upcoming")
@@ -27,7 +26,7 @@ interface MoviesAPI {
         @Query("language")
         lang: String = "en-US",
         @Query("page")
-        page: Int
-    ): Response<UpcomingResponse>
+        page: Int?
+    ): Response<CommonResponse>
 
 }

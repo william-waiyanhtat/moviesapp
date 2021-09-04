@@ -1,15 +1,20 @@
 package com.celestial.movieapp.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.DifferCallback
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.celestial.movieapp.R
 import com.celestial.movieapp.data.model.MovieModel
 import com.celestial.movieapp.databinding.PopularItemBinding
+import kotlinx.coroutines.withContext
 
-class PopularAdapter: PagingDataAdapter<MovieModel, PopularAdapter.MovieItemViewHolder>(DIFF_CALLBACK) {
+class PopularAdapter(): PagingDataAdapter<MovieModel, PopularAdapter.MovieItemViewHolder>(DIFF_CALLBACK) {
 
     companion object{
         val DIFF_CALLBACK = object: DiffUtil.ItemCallback<MovieModel>() {
@@ -22,6 +27,8 @@ class PopularAdapter: PagingDataAdapter<MovieModel, PopularAdapter.MovieItemView
             }
         }
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder {
         val binding = PopularItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)

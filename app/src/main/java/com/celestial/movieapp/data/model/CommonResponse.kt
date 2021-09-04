@@ -1,14 +1,14 @@
 package com.celestial.movieapp.data.model
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "remote_keys")
 data class CommonResponse (
-
-    @PrimaryKey(autoGenerate = false)
-    val movieType: String = "upcoming",
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
 
     @SerializedName("page")
     val page: Int,
@@ -17,5 +17,15 @@ data class CommonResponse (
     val totalPages: Int,
 
     @SerializedName("total_result")
-    val totalResult: Int
-)
+    val totalResult: Int,
+
+){
+
+    @Ignore
+    @SerializedName("results")
+    val result: List<MovieModel>? = null
+
+    @Ignore
+    @SerializedName("dates")
+    val dates: Dates? = null
+}

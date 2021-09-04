@@ -20,4 +20,16 @@ class MoviesViewModel @Inject constructor(
         return moviesRepository.fetchUpcomingMoviesList().cachedIn(viewModelScope)
     }
 
+    @ExperimentalPagingApi
+    fun fetchPopularMovies(): Flow<PagingData<MovieModel>>{
+        return moviesRepository.fetchUpcomingMoviesList().cachedIn(viewModelScope)
+    }
+
+    fun updateMovieAsFavourite(movie: MovieModel){
+        viewModelScope.launch {
+            moviesRepository.setFavourite(movie)
+        }
+
+    }
+
 }

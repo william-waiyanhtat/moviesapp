@@ -4,13 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 
 data class UpcomingResponse (
-   val commonResponse: CommonResponse,
+  val test: Int,
 
-   @SerializedName("result")
-   val result: List<MovieModel>,
-
-   @SerializedName("dates")
-   val dates: Dates
    )
 
 

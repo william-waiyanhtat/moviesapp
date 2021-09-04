@@ -6,26 +6,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.paging.PagingDataAdapter
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.celestial.movieapp.R
+import com.celestial.movieapp.data.model.MovieModel
 import com.celestial.movieapp.databinding.FragmentMainBinding
+import com.celestial.movieapp.ui.adapter.MoviesLoadingAdapter
 import com.celestial.movieapp.ui.adapter.PopularAdapter
+import com.celestial.movieapp.ui.adapter.UpcomingAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 private val TAG = MainFragment::class.java.name
 
 class MainFragment : Fragment() {
 
-    private var _binding: FragmentMainBinding? =null
+    private var _binding: FragmentMainBinding? = null
 
     private val binding get() = _binding!!
 
     private lateinit var popularAdapter: PopularAdapter
 
     lateinit var moviesViewModel: MoviesViewModel
+
+    lateinit var adapter: UpcomingAdapter
+
+    lateinit var upcomingRV: RecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,40 +50,50 @@ class MainFragment : Fragment() {
 
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val view = binding.root
-        setUpAdapter()
-        setUpRecylerView()
-        observeData()
 
+        setUpView()
+        fetchPosts()
 
         return view
     }
 
-    private fun observeData() {
-        moviesViewModel?.let{
-            it.tryAPICall().observe(viewLifecycleOwner, Observer {
-                it-> run{
-                    Log.d(TAG,"Item Come back")
-
+    @OptIn(ExperimentalPagingApi::class)
+    private fun fetchPosts() {
+        lifecycleScope.launch {
+            moviesViewModel.fetchUpcomingMovies().collectLatest {
+                pagingData -> adapter.submitData(pagingData)
             }
 
-            })
         }
     }
 
-    private fun setUpAdapter() {
-        popularAdapter = PopularAdapter()
+    private fun setUpView() {
+        adapter = UpcomingAdapter(requireContext(), favInterface)
+        upcomingRV = binding.upcomingRcyView
+        upcomingRV.apply {
+            layoutManager = LinearLayoutManager(context)
+        }
+
+
+
+        upcomingRV.adapter = adapter.also {
+            it.withLoadStateHeaderAndFooter(
+                header = MoviesLoadingAdapter{it.retry()},
+                footer = MoviesLoadingAdapter{it.retry()}
+            )
+        }
     }
 
-    private fun setUpRecylerView() {
-       binding.upcomingRcyView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-       binding.upcomingRcyView.adapter = popularAdapter
+    val favInterface = object :FavInterface{
+        override fun setFav(movie: MovieModel) {
+            Log.d(TAG,"setFav Called"+movie.toString())
+            moviesViewModel.updateMovieAsFavourite(movie)
+        }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainFragment()
-    }
 
+    interface FavInterface{
+        fun setFav(movie: MovieModel)
+    }
 
 }

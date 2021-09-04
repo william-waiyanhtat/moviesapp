@@ -7,10 +7,10 @@ import com.celestial.movieapp.data.model.MovieModel
 @Dao
 interface MoviesDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMovie(movie: MovieModel)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertAllMovies(movies: List<MovieModel>)
 
     @Delete
@@ -24,5 +24,8 @@ interface MoviesDao {
 
     @Query("SELECT * FROM movies")
     fun readAllPopularMovies(): PagingSource<Int, MovieModel>
+
+    @Update
+    suspend fun updateMovie(movie: MovieModel): Int
 
 }

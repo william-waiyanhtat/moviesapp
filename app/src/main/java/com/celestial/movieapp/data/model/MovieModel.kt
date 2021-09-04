@@ -13,47 +13,47 @@ data class MovieModel(
     val adult: Boolean,
 
     @SerializedName("backdrop_path")
-    val backdropPath: String,
-
-
-    @SerializedName("genre_ids")
-    val genreIds: Array<Int?>?,
+    val backdropPath: String?,
 
     @PrimaryKey
     @SerializedName("id")
     val id: Int,
 
     @SerializedName("original_language")
-    val originalLanguage: String,
+    val originalLanguage: String?,
 
     @SerializedName("original_title")
-    val originalTitle: String,
+    val originalTitle: String?,
 
     @SerializedName("overview")
-    val overview: String,
+    val overview: String?,
 
     @SerializedName("popularity")
     val popularity: Double,
 
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
 
     @SerializedName("release_date")
-    val releaseDate: String,
+    val releaseDate: String?,
 
     @SerializedName("title")
-    val title: String,
+    val title: String?,
 
     @SerializedName("video")
     val video: Boolean,
 
     @SerializedName("vote_average")
-    val voteAverage: Int,
+    val voteAverage: Float,
 
     @SerializedName("vote_count")
     val voteCount: Int,
 
     @SerializedName("is_upcoming")
-    val isUpcoming: Boolean = true
+    var isUpcoming: Boolean,
+
+    var isPopular :Boolean,
+
+    var isFav: Boolean
 
 )
