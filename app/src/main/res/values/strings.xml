@@ -5,4 +5,6 @@
 
     <string name="upcoming_label">Upcoming Movies</string>
     <string name="popular_label">Popular Movies</string>
+
+    <string name="retry_label">Retry</string>
 </resources>
