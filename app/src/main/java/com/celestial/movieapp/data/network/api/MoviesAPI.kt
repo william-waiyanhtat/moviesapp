@@ -1,5 +1,6 @@
 package com.celestial.movieapp.data.network.api
 
+import com.celestial.movieapp.BuildConfig
 import com.celestial.movieapp.data.model.PopularResponse
 import com.celestial.movieapp.data.model.UpcomingResponse
 import retrofit2.Response
@@ -8,10 +9,10 @@ import retrofit2.http.Query
 
 interface MoviesAPI {
 
-    @GET("/popular")
+    @GET("popular")
     suspend fun getPopularMovies(
         @Query("api_key")
-        apiKey: String,
+        apiKey: String = BuildConfig.API_KEY,
         @Query("language")
         lang: String = "en-US",
         @Query("page")
@@ -19,10 +20,10 @@ interface MoviesAPI {
     ): Response<PopularResponse>
 
 
-    @GET("/upcoming")
+    @GET("upcoming")
     suspend fun getUpcomingMovies(
         @Query("api_key")
-        apiKey: String,
+        apiKey: String = BuildConfig.API_KEY,
         @Query("language")
         lang: String = "en-US",
         @Query("page")

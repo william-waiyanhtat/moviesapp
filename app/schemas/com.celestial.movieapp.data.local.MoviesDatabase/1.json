@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e04bd7ab1a8a0c4415a5eef8dde204d2",
+    "identityHash": "b7e14d5d0fb65c5f5aea7947c88b8287",
     "entities": [
       {
         "tableName": "movies",
@@ -107,12 +107,50 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "remote_keys",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`movieType` TEXT NOT NULL, `page` INTEGER NOT NULL, `totalPages` INTEGER NOT NULL, `totalResult` INTEGER NOT NULL, PRIMARY KEY(`movieType`))",
+        "fields": [
+          {
+            "fieldPath": "movieType",
+            "columnName": "movieType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "page",
+            "columnName": "page",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalPages",
+            "columnName": "totalPages",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalResult",
+            "columnName": "totalResult",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "movieType"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e04bd7ab1a8a0c4415a5eef8dde204d2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b7e14d5d0fb65c5f5aea7947c88b8287')"
     ]
   }
 }

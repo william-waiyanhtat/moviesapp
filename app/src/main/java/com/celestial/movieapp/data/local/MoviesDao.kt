@@ -10,8 +10,14 @@ interface MoviesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movie: MovieModel)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllMovies(movies: List<MovieModel>)
+
     @Delete
     suspend fun deleteMovie(movie: MovieModel)
+
+    @Query("DELETE FROM movies ")
+    suspend fun deleteAllMovies()
 
     @Query("SELECT * FROM movies")
     fun readAllUpcomingMovies(): PagingSource<Int, MovieModel>
