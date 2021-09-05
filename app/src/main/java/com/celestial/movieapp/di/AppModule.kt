@@ -36,21 +36,11 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideContext(@ApplicationContext context: Context)= context
+    fun provideContext(@ApplicationContext context: Context) = context
 
     @Singleton
     @Provides
-    fun provideGlideInstance(
-        @ApplicationContext context: Context
-    ) = Glide.with(context).setDefaultRequestOptions(
-        RequestOptions()
-            .placeholder(R.drawable.ic_image)
-            .error(R.drawable.ic_image)
-    )
-
-    @Singleton
-    @Provides
-    fun provideMovieAPI(): MoviesAPI{
+    fun provideMovieAPI(): MoviesAPI {
 
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -89,9 +79,6 @@ class AppModule {
         api: MoviesAPI,
         @ApplicationContext context: Context
     ) = MoviesRepository(db, api, context)
-
-
-
 
 
 }
