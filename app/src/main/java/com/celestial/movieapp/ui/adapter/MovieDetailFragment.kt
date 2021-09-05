@@ -52,22 +52,19 @@ class MovieDetailFragment : Fragment() {
 
     private fun bindData() {
         val movie = MoviesViewModel.detailMovie
-
-
-
-
         movie?.let{
             glide.load("https://image.tmdb.org/t/p/w500" + it.backdropPath)
                 .into(binding.imageView)
             binding.tvMovieTitle.text = it.title
             binding.tvReleaseDate.text = it.releaseDate
             binding.tvOverview.text = it.overview
+            binding.tvRating.text = "Average Rating : ${it.voteAverage}"
         }
-
-
-
-
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        MoviesViewModel.detailMovie = null
+    }
 
 }

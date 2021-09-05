@@ -10,25 +10,25 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="center"/>
 
     <TextView
         android:id="@+id/tv_movieTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_large"
         android:text="Movie Detail"
         android:textSize="@dimen/textsize_large"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/tv_releaseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textsize_normal"
+        android:layout_margin="@dimen/spacing_normal"
         android:text="adkfadf"
         android:textSize="@dimen/textsize_normal"
         app:layout_constraintEnd_toEndOf="@+id/tv_movieTitle"
@@ -44,6 +44,14 @@
         android:textSize="@dimen/textsize_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_movieTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tv_releaseDate" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_rating" />
 
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XXX"
+        android:textSize="@dimen/textsize_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_releaseDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>
