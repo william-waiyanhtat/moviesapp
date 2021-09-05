@@ -22,7 +22,10 @@ class MovieAdapter(
 ) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
+    val TAG = MovieAdapter::class.simpleName
+
     var movies: ArrayList<MovieModel> = ArrayList<MovieModel>()
+
 
 
     fun addMovies(movieList: List<MovieModel>) {

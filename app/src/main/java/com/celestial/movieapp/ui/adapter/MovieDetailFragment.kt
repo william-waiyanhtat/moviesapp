@@ -65,6 +65,7 @@ class MovieDetailFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         MoviesViewModel.detailMovie = null
+        _binding = null
     }
 
 }
