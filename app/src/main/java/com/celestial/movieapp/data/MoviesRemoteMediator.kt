@@ -4,10 +4,8 @@ import android.util.Log
 import androidx.paging.*
 import androidx.room.withTransaction
 import com.celestial.movieapp.data.local.MoviesDatabase
-import com.celestial.movieapp.data.local.RemoteKeyDao
 import com.celestial.movieapp.data.model.CommonResponse
 import com.celestial.movieapp.data.model.MovieModel
-import com.celestial.movieapp.data.model.UpcomingResponse
 import com.celestial.movieapp.data.network.api.MoviesAPI
 import retrofit2.HttpException
 import java.io.IOException
@@ -54,7 +52,7 @@ class MoviesRemoteMediator (
 
                    Log.d(TAG,"APPEND LIST->RemoteKey")
                    val remoteKey = db.withTransaction {
-                       remoteKeyDao.remoteKeyByPage().firstOrNull()
+                       remoteKeyDao.getUpcomingRemoteKeyByPage().firstOrNull()
                    }
                    remoteKey
                }

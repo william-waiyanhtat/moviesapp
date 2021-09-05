@@ -54,6 +54,10 @@ data class MovieModel(
 
     var isPopular :Boolean,
 
-    var isFav: Boolean
+    var isFav: Boolean,
+
+    var time: Long,
+
+    var page: Int
 
 )

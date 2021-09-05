@@ -3,4 +3,8 @@
     <dimen name="spacing_small">4dp</dimen>
     <dimen name="spacing_normal">8dp</dimen>
     <dimen name="spacing_large">16dp</dimen>
+
+    <dimen name="textsize_normal">12sp</dimen>
+    <dimen name="textsize_small">9sp</dimen>
+    <dimen name="textsize_large">18sp</dimen>
 </resources>

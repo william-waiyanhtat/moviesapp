@@ -10,4 +10,11 @@
         android:name="com.celestial.movieapp.ui.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/movieDetailFragment2"
+        android:name="com.celestial.movieapp.ui.adapter.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" />
+
+
 </navigation>

@@ -19,13 +19,11 @@ data class CommonResponse (
     @SerializedName("total_result")
     val totalResult: Int,
 
-){
+    var isUpComing: Boolean
 
+){
     @Ignore
     @SerializedName("results")
     val result: List<MovieModel>? = null
 
-    @Ignore
-    @SerializedName("dates")
-    val dates: Dates? = null
 }

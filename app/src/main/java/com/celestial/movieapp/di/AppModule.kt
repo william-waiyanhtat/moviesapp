@@ -86,8 +86,9 @@ class AppModule {
     @Provides
     fun provideMoviesRepository(
         db: MoviesDatabase,
-        api: MoviesAPI
-    ) = MoviesRepository(db, api)
+        api: MoviesAPI,
+        @ApplicationContext context: Context
+    ) = MoviesRepository(db, api, context)
 
 
 

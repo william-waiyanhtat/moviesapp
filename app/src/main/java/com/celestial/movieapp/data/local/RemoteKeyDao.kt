@@ -12,8 +12,12 @@ interface RemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(commonResponse: CommonResponse)
 
-    @Query("SELECT * FROM remote_keys ORDER BY id DESC")
-    suspend fun remoteKeyByPage(): List<CommonResponse>
+    @Query("SELECT * FROM remote_keys where isUpComing like 1 ORDER BY id DESC")
+    suspend fun getUpcomingRemoteKeyByPage(): List<CommonResponse>
+
+    @Query("SELECT * FROM remote_keys where isUpComing like 0 ORDER BY id DESC")
+    suspend fun getPopularRemoteKeyByPage(): List<CommonResponse>
+
 
     @Query("DELETE FROM remote_keys")
     suspend fun deleteByKey()

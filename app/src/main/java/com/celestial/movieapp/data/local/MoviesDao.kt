@@ -10,7 +10,7 @@ interface MoviesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMovie(movie: MovieModel)
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAllMovies(movies: List<MovieModel>)
 
     @Delete
@@ -27,5 +27,17 @@ interface MoviesDao {
 
     @Update
     suspend fun updateMovie(movie: MovieModel): Int
+
+    @Query("SELECT * FROM movies where isUpcoming = 1 ORDER BY time ASC")
+    suspend fun readAllUpcomingMovieList(): List<MovieModel>
+
+    @Query("SELECT * FROM movies where isUpcoming = 0 ORDER BY time ASC")
+    suspend fun readAllPopularMovieList(): List<MovieModel>
+
+    @Query("SELECT * FROM movies where page =:page and isUpcoming=1 ORDER BY time ASC")
+    suspend fun readUpcomingMovieListByPage(page: Int): List<MovieModel>
+
+    @Query("SELECT * FROM movies where page =:page and isUpcoming=0 ORDER BY time ASC")
+    suspend fun readPopularMovieListByPage(page: Int): List<MovieModel>
 
 }
